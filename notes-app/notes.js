@@ -1,8 +1,6 @@
 const fs = require('fs')
 const chalk = require('chalk')
 
-const getNotes = () => 'Your notes...'
-
 const addNote = (title, body) => {
 	const notes = loadNotes()
 	const duplicateNotes = notes.filter((note) => note.title === title)
@@ -32,6 +30,14 @@ const removeNote = (title) => {
 	}
 }
 
+const listNotes = () => {
+	console.log(chalk.magenta.inverse('Your notes'))
+	const notes = loadNotes()
+	notes.forEach(note => {
+		console.log(note.title)
+	});
+}
+
 const loadNotes = () => {
 	try {
 		const dataBuffer = fs.readFileSync('notes.json')
@@ -48,7 +54,7 @@ const saveNotes = (notes) => {
 }
 
 module.exports = {
-	getNotes: getNotes,
+	listNotes: listNotes,
 	addNote: addNote,
 	removeNote: removeNote
 }
