@@ -64,5 +64,31 @@ MongoClient.connect(connectionUrl, { useNewUrlParser: true, useUnifiedTopology: 
   //   console.log(result.ops)
   // })
 
+  // db.collection('users').findOne({ _id: new ObjectID('5e5ed1e48793a1d391b07917') }, (error, user) => {
+  //   if (error) {
+  //     console.log('Unable to fetch')
+  //   }
 
+  //   console.log(user)
+  // })
+
+  // db.collection('users').find({ age: 24 }).toArray((error, users) => {
+  //   console.log(users)
+  // })
+
+  // db.collection('users').find({ age: 24 }).count((error, count) => {
+  //   console.log(count)
+  // })
+
+  // db.collection('tasks').findOne({ _id: new ObjectID('5e5ed2d0dedf08d3f703e6f1') }, (error, task) => {
+  //   if (error) {
+  //     console.log('Unable to fetch')
+  //   }
+
+  //   console.log(task)
+  // })
+
+  db.collection('tasks').find({ completed: false }).toArray((error, tasks) => {
+    console.log(tasks)
+  })
 })
