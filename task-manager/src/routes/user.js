@@ -3,7 +3,23 @@ const multer = require('multer')
 const User = require('../models/user')
 const auth = require('../middleware/auth')
 const router = new express.Router()
-const upload = multer({ dest: 'avatars' })
+const upload = multer({ 
+  dest: 'avatars',
+  limits: {
+    fileSize: 1000000
+  },
+  fileFilter(req, file, cb) {
+    if (!file.originalname.match(/\.(doc|docx)$/)) {
+      return cb(new Error('Please upload a Word document'))
+    }
+
+    cb(undefined, true)
+
+    // cb(new Error('File must be a pdf'))
+    // cb(undefined, true)
+    // cb(undefined, false)
+  } 
+})
 
 router.post('/users', async (req, res) => {
   const user = new User(req.body)
